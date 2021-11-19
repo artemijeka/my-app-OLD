@@ -1,4 +1,5 @@
-##### Остановился тут https://ru.reactjs.org/docs/introducing-jsx.html
+##### Остановился тут 
+  https://ru.reactjs.org/docs/components-and-props.html#composing-components
 
 ##### * В корне версия с интеграцией в html при помощи:
   `<script scrossorigin src="..."></script>`
