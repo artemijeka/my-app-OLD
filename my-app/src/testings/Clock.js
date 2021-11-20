@@ -13,6 +13,9 @@ class Clock extends React.Component {
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000);
   }
+  
+  /* Есть ещё такой встроенный метод  */
+  componentDidUpdate() {}
 
   /* Эти методы называются «методами жизненного цикла» (lifecycle methods). */
   /* Должны называться именно этими именами! */
