@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import MyApp from './MyApp';
 // import Button from './testings/bootstrap/Button';
+import Toggle from './testings/Toggle';
 import Clock from './testings/Clock';
 import Comment from './testings/Comment';
 import Testings from './testings/Testings';
@@ -13,6 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <MyApp />
     {/* <Button /> */}
+    <Toggle />
     <Clock />
     <Comment author="asdasd" text="asdasd" date="111111"/>
     <Testings />
