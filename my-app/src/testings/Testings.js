@@ -1,4 +1,4 @@
-import './Testings.css';
+import './Testings.scss';
 
 function Testings() {
 
