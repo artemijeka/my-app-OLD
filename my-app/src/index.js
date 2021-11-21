@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 
 import MyApp from './MyApp';
 // import Button from './testings/bootstrap/Button';
+import Reservation from './testings/Reservation';
+import FlavorForm from './testings/FlavorForm';
+import EssayForm from './testings/EssayForm';
+import NameForm from './testings/NameForm';
 import NumberList from './testings/NumberList';
 import Warning from './testings/Warning';
 import LoginControl from './testings/LoginControl';
@@ -18,6 +22,10 @@ ReactDOM.render(
     <MyApp />
     {/* <Button /> */}
 
+    <Reservation />
+    <FlavorForm />
+    <EssayForm />
+    <NameForm />
     <NumberList numbers={[1, 2, 3, 4, 5]} />
     <Warning />
     <LoginControl />

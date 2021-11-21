@@ -1,5 +1,5 @@
 ##### Остановился тут 
-  https://ru.reactjs.org/docs/lists-and-keys.html#keys-must-only-be-unique-among-siblings
+  https://ru.reactjs.org/docs/lifting-state-up.html
 
 ##### * В корне версия с интеграцией в html при помощи:
   `<script scrossorigin src="..."></script>`
