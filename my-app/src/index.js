@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import MyApp from './MyApp';
 // import Button from './testings/bootstrap/Button';
+import CalculatorBoiling from './testings/CalculatorBoiling';
 import Reservation from './testings/Reservation';
 import FlavorForm from './testings/FlavorForm';
 import EssayForm from './testings/EssayForm';
@@ -22,6 +23,7 @@ ReactDOM.render(
     <MyApp />
     {/* <Button /> */}
 
+    <CalculatorBoiling />
     <Reservation />
     <FlavorForm />
     <EssayForm />
