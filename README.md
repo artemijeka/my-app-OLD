@@ -1,5 +1,10 @@
 ##### Остановился тут 
-  https://ru.reactjs.org/docs/lifting-state-up.html
+  https://ru.reactjs.org/docs/thinking-in-react.html
+  
+#### Debug 
+  https://github.com/facebook/react/tree/main/packages/react-devtools
+  npx react-devtools
+
 
 ##### react-bootstrap 
   https://react-bootstrap.github.io/getting-started/introduction/
