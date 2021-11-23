@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import MyApp from './MyApp';
 // import Button from './testings/bootstrap/Button';
+import FilterableProductTable from './testings/FilterableProductTable';
 import CalculatorBoiling from './testings/CalculatorBoiling';
 import Reservation from './testings/Reservation';
 import FlavorForm from './testings/FlavorForm';
@@ -18,11 +19,25 @@ import Testings from './testings/Testings';
 
 import reportWebVitals from './reportWebVitals';
 
+
+
+const PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+];
+
+
+
 ReactDOM.render(
   <React.StrictMode>
     <MyApp />
     {/* <Button /> */}
 
+    <FilterableProductTable products={PRODUCTS} />
     <CalculatorBoiling />
     <Reservation />
     <FlavorForm />
