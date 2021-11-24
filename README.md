@@ -1,41 +1,70 @@
-##### Остановился тут 
-  https://ru.reactjs.org/docs/accessibility.html
+# Getting Started with Create React App
 
-##### Теория
-  Состояние === интерактивность
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-  Что должно храниться в состоянии? Задайте себе три вопроса:
-    1 Передаются ли они от родителя через пропсы? Если так, тогда эти данные не должны храниться в состоянии компонента.
-    2 Остаются ли они неизменными со временем? Если так, тогда их тоже не следует хранить в состоянии.
-    3 Можете ли вы вычислить их на основании любых других данных в своём компоненте или пропсов? Если так, тогда это тоже не состояние.
-      Ответ:
-        1 Исходный список товаров передаётся через пропсы, так что не нужно хранить его в состоянии компонента. 
-        2 Поисковый запрос и состояние чекбокса изменяются со временем, и их нельзя вычислить из других данных, так что они вполне сойдут за состояние. 
-        3 Напоследок, отфильтрованный список товаров не является состоянием, так как его можно вычислить из оригинального списка, поискового запроса и значения чекбокса.
-          В итоге, состоянием являются:
-            Поисковый запрос, введённый пользователем
-            Значение чекбокса
-              Моё: то есть то что
-  
-#### Debug 
-  https://github.com/facebook/react/tree/main/packages/react-devtools
-  npx react-devtools
+## Available Scripts
 
+In the project directory, you can run:
 
-##### react-bootstrap 
-  https://react-bootstrap.github.io/getting-started/introduction/
+### `npm start`
 
-##### bootstrap 
-  https://react-bootstrap.github.io/getting-started/introduction/
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-##### * В корне версия с интеграцией в html при помощи:
-  `<script scrossorigin src="..."></script>`
-##### * В my-app полная система сборки 
-  `npx create-react-app`
-##### разработка
-  ```
-  cd my-app
-  npm start
-  ```
-##### сборка
-  `npm run build `  
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
