@@ -1,5 +1,5 @@
 ##### Остановился тут 
-  https://ru.reactjs.org/docs/accessibility.html#programmatically-managing-focus
+  https://ru.reactjs.org/docs/code-splitting.html
 
 ##### Теория
   Состояние === интерактивность
