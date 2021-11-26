@@ -1,0 +1,50 @@
+.card {
+  max-width: 22em;
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 1rem;
+
+  &__title {
+    font-size: 1.1em;
+    font-weight: 500;
+    user-select: none;
+  }
+
+  &__text {
+    font-size: 0.9em;
+    user-select: none;
+
+    margin-top: 0.6em;
+  }
+
+  &__button {
+    font-size: 0.9em;
+    
+    margin-top: 1em;
+  }
+
+  &__select {
+    font-size: 0.9em;
+    padding: 0.4em;
+    border: 0.2em solid rgba(0, 0, 0, 0.2);
+    background-color: #ddd;
+    cursor: pointer;
+    border-radius: 0.4em;
+    font-weight: 500;
+    
+    margin-left: 0.4em;
+  }
+
+  &__alert {
+    font-size: 0.9em;
+    padding: 0.44em;
+    border: 0.2em solid transparent;
+    background-color: #ddd;
+    border-radius: 0.4em;
+    font-weight: 400;
+    
+    margin-left: 0.4em;
+
+  }
+}

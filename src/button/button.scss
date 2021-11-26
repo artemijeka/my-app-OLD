@@ -1,0 +1,14 @@
+.button {
+  background-color: red;
+  color: white;
+  border-radius: 0.4em;
+  font-weight: 500;
+  padding: 0.4em;
+  border: 0.2em solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  &.--break {
+    background-color: limegreen;
+    // color: black;
+  }
+}

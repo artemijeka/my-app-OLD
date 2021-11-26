@@ -3,8 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './common/Common.scss';
+import './index.scss';
 
 import Pomodoro from './pomodoro/Pomodoro';
 // import TasksTable from './tasks/TasksTable';
