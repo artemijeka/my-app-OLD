@@ -1,4 +1,7 @@
-##### Остановился тут 
+##### Остановился тут: 
+  https://ru.reactjs.org/docs/context.html#classcontexttype
+
+#### Пропустил пока что:
   https://ru.reactjs.org/docs/context.html
 
 ##### Теория

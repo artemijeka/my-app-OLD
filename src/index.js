@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 
 import Pomodoro from './pomodoro/Pomodoro';
+import TasksList from './tasks/TasksList';
 // import TasksTable from './tasks/TasksTable';
 
 import reportWebVitals from './reportWebVitals';
@@ -39,6 +40,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <TasksList />
     <Pomodoro />
     {/* <TasksTable /> */}
 

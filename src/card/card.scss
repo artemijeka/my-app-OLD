@@ -1,9 +1,11 @@
 .card {
   max-width: 22em;
-  border: 1px solid red;
+  border: 0.2em solid rgba(255, 0, 0, 0.5);
   border-radius: 10px;
   padding: 30px;
   font-size: 1rem;
+
+  margin: 1em;
 
   &__title {
     font-size: 1.1em;
@@ -20,7 +22,7 @@
 
   &__button {
     font-size: 0.9em;
-    
+
     margin-top: 1em;
   }
 
@@ -32,19 +34,11 @@
     cursor: pointer;
     border-radius: 0.4em;
     font-weight: 500;
-    
+
     margin-left: 0.4em;
   }
 
   &__alert {
-    font-size: 0.9em;
-    padding: 0.44em;
-    border: 0.2em solid transparent;
-    background-color: #ddd;
-    border-radius: 0.4em;
-    font-weight: 400;
-    
     margin-left: 0.4em;
-
   }
 }
