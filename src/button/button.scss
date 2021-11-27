@@ -6,8 +6,13 @@
   padding: 0.4em;
   border: 0.2em solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  &.--yellow {
+    background-color: yellow;
+    color: black;
+  }
 
-  &.--break {
+  &.--break,
+  &.--green {
     background-color: limegreen;
     // color: black;
   }

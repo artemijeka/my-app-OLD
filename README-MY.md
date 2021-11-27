@@ -1,5 +1,8 @@
 ##### Остановился тут: 
-  https://ru.reactjs.org/docs/forwarding-refs.html
+  indexedDB 
+    https://learn.javascript.ru/indexeddb
+  reactjs
+    https://ru.reactjs.org/docs/forwarding-refs.html
 
 #### Пропустил пока что:
   https://ru.reactjs.org/docs/context.html

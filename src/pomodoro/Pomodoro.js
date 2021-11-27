@@ -32,8 +32,8 @@ class Pomodoro extends React.Component {
     console.log(pomodoroMinutesMemory);
     console.log(pomodoroSecondsMemory);
     if (pomodoroMinutesMemory !== 0 || pomodoroSecondsMemory !== 0) {
-      console.log('pomodoroMinutesMemory: '+pomodoroMinutesMemory);
-      console.log('pomodoroSecondsMemory: '+pomodoroSecondsMemory);
+      // console.log('pomodoroMinutesMemory: '+pomodoroMinutesMemory);
+      // console.log('pomodoroSecondsMemory: '+pomodoroSecondsMemory);
       this.pomodoroMinutes = pomodoroMinutesMemory;
       this.pomodoroSeconds = pomodoroSecondsMemory;
       // this.setState({
@@ -95,6 +95,7 @@ class Pomodoro extends React.Component {
         this.setState({
           pomodoroTimer: [curTimer[0], curTimer[1]],
         });
+        document.title = this.state.pomodoroTimer.join(':');
         localStorage.setItem('pomodoroMinutesMemory', curTimer[0]);
         localStorage.setItem('pomodoroSecondsMemory', curTimer[1]);
         // console.log(this.state.pomodoroTimer);

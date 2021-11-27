@@ -1,13 +1,25 @@
 .tasks-item {
   display: flex;
   justify-content: space-between;
+
   &__content {
-    width: 90%;
-    max-width: 90%;
-    min-width: 90%;
-    min-height: 1.8em;
-    height: 1.8em;
+    width: 13em;
+    max-width: 13em;
+    min-width: 13em;
+    min-height: 2em;
+    height: 2em;
     font-size: 1em;
     padding: 0.2em;
+    border-radius: 0.3em;
+    border: 2px solid rgba(255, 0, 0, 0.5);
+    &:focus,
+    &:focus-visible {
+      border: 2px solid rgba(255, 0, 0, 0.5);
+    }
+  }
+
+  &__button {
+    max-height: 2.4em;
+    min-width: 2.4em;
   }
 }

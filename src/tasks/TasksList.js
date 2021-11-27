@@ -11,7 +11,10 @@ class TasksList extends React.Component {
   render() {
     return (
       <Card title="Мои задачи">
-        <TasksItem className='tasks-list__tasks-item' />
+        <TasksItem
+          key={this.props.key}
+          className='tasks-list__tasks-item'
+        />
       </Card>
     );
   }
