@@ -1,5 +1,5 @@
 ##### Остановился тут: 
-  https://ru.reactjs.org/docs/context.html#classcontexttype
+  https://ru.reactjs.org/docs/forwarding-refs.html
 
 #### Пропустил пока что:
   https://ru.reactjs.org/docs/context.html
