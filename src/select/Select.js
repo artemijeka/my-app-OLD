@@ -1,4 +1,4 @@
-// import './select.scss';
+import './select.scss';
 
 export default function Select(props) {
   return (

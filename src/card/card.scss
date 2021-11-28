@@ -1,5 +1,7 @@
 .card {
   max-width: 22em;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 1rem;
   border: 0.2em solid rgba(255, 0, 0, 0.5);
   border-radius: 10px;
@@ -17,13 +19,16 @@
     font-size: 0.9em;
     user-select: none;
 
-    margin-top: 0.6em;
+    // margin-top: 0.6em;
   }
 
   &__button {
     font-size: 0.9em;
 
-    margin-top: 1em;
+    // margin-top: 1em;
+    &:not(:first-of-type) {
+      margin-left: 0.4em;
+    }
   }
 
   &__select {
@@ -39,6 +44,8 @@
   }
 
   &__alert {
-    margin-left: 0.4em;
+    &:not(:first-child) {
+      margin-left: 0.4em;
+    }
   }
 }
