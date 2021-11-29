@@ -1,23 +1,21 @@
 .button {
-  background-color: red;
-  color: white;
+  background-color: #FF7171;
+  color: black;
   border-radius: 0.4em;
   font-weight: 500;
   padding: 0.4em;
-  border: 0.2em solid rgba(0, 0, 0, 0.2);
+  border: 0.15em solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
   &.--yellow {
-    background-color: yellow;
-    color: black;
+    background-color: #FFFA7D;
   }
 
   &.--break,
   &.--green {
-    background-color: limegreen;
-    // color: black;
+    background-color: #A0FF6F;
   }
 
   &.--reset {
-    background-color: #FFA461;
+    background-color: #FFB071;//#FFA461;
   }
 }
