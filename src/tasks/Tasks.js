@@ -7,7 +7,7 @@ class Tasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasksItems: null,
+      // tasksItems: <br/>,
       // idb: null,
     }
     this.addTask = this.addTask.bind(this);
@@ -95,9 +95,9 @@ class Tasks extends React.Component {
       </div>
     );
 
-    this.setState({
-      tasksItems: itemJSX
-    });
+    // this.setState({
+    //   tasksItems: this.state.tasksItems + itemJSX
+    // });
 
     let request = tasksCard.put(task, task.id);//, task.id
 
@@ -114,7 +114,7 @@ class Tasks extends React.Component {
     return (
       <TasksCard
         addTask={this.addTask}
-        children={this.state.tasksItems}
+        // children={this.state.tasksItems}
       />
     );
   }
