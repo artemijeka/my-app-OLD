@@ -1,6 +1,6 @@
 ##### Остановился тут: 
   indexedDB 
-    https://learn.javascript.ru/indexeddb
+    https://learn.javascript.ru/indexeddb#avtomaticheskaya-fiksatsiya-tranzaktsiy
   reactjs
     https://ru.reactjs.org/docs/forwarding-refs.html
 
