@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Fira Code', sans-serif;
+  font-family: "Fira Code", sans-serif;
 }
 
 :root {
@@ -19,7 +19,7 @@ body {
 }
 
 .row {
-  width: 100%;  
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -35,6 +35,11 @@ body {
 .d-if {
   display: inline-flex;
 }
-.js-sb{
+
+.js-sb {
   justify-content: space-between;
+}
+
+.js-c {
+  justify-content: center;
 }

@@ -26,6 +26,7 @@ class TasksItem extends React.Component {
       <div
         className={`tasks-item ${this.props.className}`}
         key={this.props.tasksItemKey}
+        id={this.props.tasksItemKey}
       >
         <textarea
           className='tasks-item__content'
