@@ -38,11 +38,11 @@ class Pomodoro extends React.Component {
       document.title = pomodoroMinutes + ':' + pomodoroSeconds;
     } else {
       // По умолчанию кол-во минут берётся из select а там по умолчанию 30 минут
-      this.setState({
-        pomodoroTimer: [Number(document.querySelector('#pomodoroMinutes').value), this.state.pomodoroTimer[1]],
+      this.setState((state, props)=>({
+        pomodoroTimer: [Number(document.querySelector('#pomodoroMinutes').value), state.pomodoroTimer[1]],
         pomodoroCurrentTimer: Number(document.querySelector('#pomodoroMinutes').value),
         pomodoroAmountTimer: Number(localStorage.getItem('pomodoroAmountTimer')),
-      });
+      }));
     }
   }
 
@@ -72,15 +72,15 @@ class Pomodoro extends React.Component {
       this.audioPlayer.play();
 
       let pomodoroInterval = setInterval(() => {
-        this.setState({
-          buttonName: this.state.pomodoroTimer.join(':'),
-        });
+        this.setState((state, props)=>({
+          buttonName: state.pomodoroTimer.join(':'),
+        }));
 
         // Если секунд становится 0
         if (this.state.pomodoroTimer[0] !== 0 && this.state.pomodoroTimer[1] === 0) {
-          this.setState({
-            pomodoroTimer: [this.state.pomodoroTimer[0] - 1, 59],
-          });
+          this.setState((state, props)=>({
+            pomodoroTimer: [state.pomodoroTimer[0] - 1, 59],
+          }));
         }
         // Если таймер закончился:
         else if (this.state.pomodoroTimer[0] === 0 && this.state.pomodoroTimer[1] === 0) {
@@ -100,15 +100,15 @@ class Pomodoro extends React.Component {
 
         } else {
           // this.state.pomodoroTimer[1] -= 1;
-          this.setState({
-            pomodoroTimer: [this.state.pomodoroTimer[0], this.state.pomodoroTimer[1] - 1],
-          });
+          this.setState((state, props)=>({
+            pomodoroTimer: [state.pomodoroTimer[0], state.pomodoroTimer[1] - 1],
+          }));
         }
 
         // Обновляем состояние таймера
-        this.setState({
-          pomodoroTimer: [this.state.pomodoroTimer[0], this.state.pomodoroTimer[1]],
-        });
+        this.setState((state, props)=>({
+          pomodoroTimer: [state.pomodoroTimer[0], state.pomodoroTimer[1]],
+        }));
         localStorage.setItem('pomodoroMinutes', this.state.pomodoroTimer[0]);
         localStorage.setItem('pomodoroSeconds', this.state.pomodoroTimer[1]);
         document.title = this.state.buttonName;
