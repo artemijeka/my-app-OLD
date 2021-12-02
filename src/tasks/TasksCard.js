@@ -12,22 +12,23 @@ class TasksCard extends React.Component {
       maxTasksId: 0,
     }
     this.addTask = this.addTask.bind(this);
+    this.tasksItemSave = this.tasksItemSave.bind(this);
   }
 
   componentDidMount() {
-    const openIndexedDB = indexedDB.open('tasks', 1);
-    // console.log(openIndexedDB);
 
-    openIndexedDB.onupgradeneeded = function () {
+    const openedIndexedDB = indexedDB.open('tasks', 1);
+
+    openedIndexedDB.onupgradeneeded = function () {
       console.log('upgradeneeded');
       // срабатывает, если на клиенте нет базы данных
       // ...выполнить инициализацию...
-      this.idb = openIndexedDB.result;
+      this.idb = openedIndexedDB.result;
 
       if (!this.idb.objectStoreNames.contains('tasks-card')) { // если хранилище "tasks-card" не существует
         this.idb.createObjectStore('tasks-card', {// создаем хранилище
-          keyPath: 'id',//вместо этого я использовал такой подход: const request = tasksCard.add(task, task.id);
-          autoIncrement: true,//вместо этого я использовал такой подход: const request = tasksCard.add(task, task.id);
+          keyPath: 'id',//вместо этого можно использовать такой подход: const request = tasksCard.add(task, task.id); ниже
+          // autoIncrement: true,//вместо этого можно использовать такой подход: const request = tasksCard.add(task, task.id); ниже
         });
       }
 
@@ -48,38 +49,63 @@ class TasksCard extends React.Component {
       }
     }
 
-
-    openIndexedDB.onerror = function () {
-      console.error("error", openIndexedDB.error);
+    openedIndexedDB.onerror = function () {
+      console.error("error", openedIndexedDB.error);
     };
 
-
-    openIndexedDB.onsuccess = function () {
-      console.log('success');
-      // продолжить работу с базой данных, используя объект idb
-      // this.setState({
-      //   idb: openIndexedDB.result,
-      // });
-      this.idb = openIndexedDB.result;
-      console.log('version: ' + this.idb.version);
-      // console.log(this.idb);
+    openedIndexedDB.onsuccess = function () {
+      console.log('openedIndexedDB success');
+      this.idb = openedIndexedDB.result;
+      console.log('version idb: ' + this.idb.version);
 
       this.idb.onversionchange = function () {
         this.idb.close();
         alert("База данных устарела, пожалуста, перезагрузите страницу.")
       };
 
-      // console.log(this.idb);
       this.transaction = this.idb.transaction('tasks-card', 'readonly');
 
-      let tasksCard = this.transaction.objectStore("tasks-card");
+      let tasksCardTransaction = this.transaction.objectStore("tasks-card");
+      console.log('tasksCardTransaction: ');
+      console.log('tasksCardTransaction: ' + tasksCardTransaction);
 
-      console.log(tasksCard);
+      // // получить одну книгу
+      // books.get('js')
+      // // получить все книги с 'css' < id < 'html'
+      // books.getAll(IDBKeyRange.bound('css', 'html'))
+      // // получить книги с 'html' <= id
+      // books.getAll(IDBKeyRange.lowerBound('html', true))
+      // // получить все ключи: id >= 'js'
+      // books.getAllKeys(IDBKeyRange.lowerBound('js', true))
+
+      // получить все книги
+      let allTasks = tasksCardTransaction.getAll();
+      this.transaction.oncomplete = function () {
+        console.log("Транзакция idb выполнена");
+        console.log(allTasks.result);
+        for (let item of allTasks.result) {
+          let newTaskJSX = (
+            <TasksItem
+              content={item.content}
+              created={item.created}
+              dataId={item.id}
+              id={'id-' + item.id}
+              className='tasks-list__tasks-item'
+              key={item.id}
+              tasksItemSave={this.tasksItemSave}
+            />
+          );
+
+          this.setState((state, props) => ({
+            tasksList: state.tasksList.concat(newTaskJSX),
+          }));
+        }
+      }.bind(this);
+
       // TODO отрендерить TasksList из 'tasks-card'
     }.bind(this);
 
-
-    openIndexedDB.onblocked = function () {
+    openedIndexedDB.onblocked = function () {
       // есть другое соединение к той же базе
       // и оно не было закрыто после срабатывания на нём idb.onversionchange
     };
@@ -89,16 +115,14 @@ class TasksCard extends React.Component {
     // deleteRequest.onsuccess/onerror отслеживает результат
   }
 
-
-
   addTask() {
     console.log('adding task...');
     // console.log(this.idb);
     this.transaction = this.idb.transaction('tasks-card', 'readwrite');
 
-    let tasksCard = this.transaction.objectStore("tasks-card");
+    let tasksCardTransaction = this.transaction.objectStore("tasks-card");
 
-    // console.log(tasksCard);
+    // console.log(tasksCardTransaction);
 
     let newTask = {
       id: this.state.maxTasksId + 1,
@@ -106,19 +130,27 @@ class TasksCard extends React.Component {
       created: new Date(),
     };
 
+    let request = tasksCardTransaction.add(newTask);//, task.id
+
+    this.transaction.oncomplete = function () {
+      console.log("Транзакция idb выполнена");
+    };
+
     this.setState((state, props) => ({
       maxTasksId: state.maxTasksId + 1
     }));
 
-    const newTaskJSX = (
+    let newTaskJSX = (
       <TasksItem
-        key={'id-' + newTask.id}
+        content={newTask.content}
+        created={newTask.created}
+        dataId={newTask.id}
         id={'id-' + newTask.id}
         className='tasks-list__tasks-item'
+        key={newTask.id}
+        tasksItemSave={this.tasksItemSave}
       />
     );
-
-    let request = tasksCard.add(newTask, newTask.id);//, task.id
 
     // console.log(this.state.tasksList);
     // this.tasksList.append( newTaskJSX );
@@ -127,12 +159,33 @@ class TasksCard extends React.Component {
     }));
 
     request.onsuccess = function () {
-      console.log("Задача добавлена в хранилище: ", request.result);
+      console.log("Задача добавлена в хранилище объектов (idb): ", request.result);
     };
 
-    request.onerror = function () {
+    request.onerror = function (event) {
       console.log("Ошибка: ", request.error);
+      // ConstraintError возникает при попытке добавить объект с ключом, который уже существует
+      if (request.error.name === "ConstraintError") {
+        console.log("Задача с таким id в idb уже существует!");//обрабатываем ошибку
+        event.preventDefault(); // предотвращаем отмену транзакции
+        event.stopPropagation(); // предотвращаем всплытие ошибки
+        // ...можно попробовать использовать другой ключ...
+      } else {
+        // ничего не делаем
+        // транзакция будет отменена
+        // мы можем обработать ошибку в transaction.onabort
+      }
     };
+
+    // Чтобы вручную отменить транзакцию, выполните:
+    // this.transaction.onabort = function() {
+    //   console.log("Ошибка", transaction.error);
+    // };
+  }
+
+  tasksItemSave(e) {
+    console.log('saving this task!!!');
+    
   }
 
   render() {

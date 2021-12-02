@@ -5,39 +5,35 @@ import './tasks-item.scss'
 class TasksItem extends React.Component {
   constructor(props) {
     super(props);
-    this.tasksItemSaveOrStart = this.tasksItemSaveOrStart.bind(this);
-    this.tasksItemChange = this.tasksItemChange.bind(this);
     this.state = {
-      tasksItemValue: '',
+      value: this.props.content,
     }
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  tasksItemSaveOrStart(e) {
-  }
-
-  tasksItemChange(e) {
+  handleChange(e) {
     this.setState({
-      tasksItemValue: e.target.value,
+      value: e.target.value,
     });
   }
 
   render() {
     return (
       <div
-        className={`tasks-item ${this.props.className}`}
-        key={this.props.key}
+        className={'tasks-item '+this.props.className}
         id={this.props.id}
       >
         <textarea
           className='tasks-item__content'
-          value={this.state.tasksItemValue}
-          onChange={this.tasksItemChange}
+          value={this.state.value}
+          content={this.props.content}
+          onChange={this.handleChange}
         >
         </textarea>
         <Button
           className="tasks-item__button --yellow"
           title="Сохранить!"
-          onClick={this.tasksItemSaveOrStart}
+          onClick={this.props.tasksItemSave}
         >S</Button>
         <Button className="tasks-item__button --green" title="Задача выполнена!">V</Button>
         <Button className="tasks-item__button" title="Удалить задачу!">X</Button>
