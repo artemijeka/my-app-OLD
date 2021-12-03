@@ -1,6 +1,6 @@
 Остановился тут: 
   js indexedDB: 
-    Поиск по индексированному полю https://learn.javascript.ru/indexeddb#poisk-po-indeksirovannomu-polyu
+    https://learn.javascript.ru/indexeddb#obyortka-dlya-promisov
 
   reactjs: 
     https://ru.reactjs.org/docs/forwarding-refs.html
