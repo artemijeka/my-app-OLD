@@ -124,6 +124,8 @@ class Pomodoro extends React.Component {
   resetPomodoro() {
     this.setState({
       pomodoroTimer: [0, 0],
+      buttonName: 'Отдых',
+      break: true,
     });
     localStorage.setItem('pomodoroMinutes', 0);
     localStorage.setItem('pomodoroSeconds', 0);
