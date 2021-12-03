@@ -17,7 +17,8 @@ class Pomodoro extends React.Component {
       pomodoroAmountTimer: 0,
       pomodoroInterval: null,
       noiseUrl: './audio/noise.mp3',
-      break: false
+      break: false,
+      selectDefaultValue: 30,
     }
     this.startPomodoro = this.startPomodoro.bind(this);
     this.resetPomodoro = this.resetPomodoro.bind(this);
@@ -151,6 +152,7 @@ class Pomodoro extends React.Component {
           <Select
             id="pomodoroMinutes"
             className="card__select"
+            defaultValue={this.state.selectDefaultValue}
             optionsList={
               <>
                 <option key="5">5</option>
@@ -158,7 +160,7 @@ class Pomodoro extends React.Component {
                 <option key="15">15</option>
                 <option key="20">20</option>
                 <option key="25">25</option>
-                <option key="30" selected="selected">30</option>
+                <option key="30">30</option>
                 <option key="35">35</option>
                 <option key="40">40</option>
                 <option key="45">45</option>

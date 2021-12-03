@@ -20,8 +20,11 @@ class TasksItem extends React.Component {
   render() {
     return (
       <div
-        className={'tasks-item '+this.props.className}
+        className={'tasks-item ' + this.props.className}
         id={this.props.id}
+        key={this.props.key}
+        data-key={this.props['data-key']}
+        data-created={this.props['data-created']}
       >
         <textarea
           className='tasks-item__content'
@@ -35,8 +38,15 @@ class TasksItem extends React.Component {
           title="Сохранить!"
           onClick={this.props.tasksItemSave}
         >S</Button>
-        <Button className="tasks-item__button --green" title="Задача выполнена!">V</Button>
-        <Button className="tasks-item__button" title="Удалить задачу!">X</Button>
+        <Button
+          className="tasks-item__button --green"
+          title="Задача выполнена!"
+        >V</Button>
+        <Button
+          className="tasks-item__button"
+          title="Удалить задачу!"
+          onClick={this.props.tasksItemDelete}
+        >X</Button>
       </div>
     );
   }

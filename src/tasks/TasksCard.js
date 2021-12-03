@@ -9,10 +9,11 @@ class TasksCard extends React.Component {
     super(props);
     this.state = {
       tasksList: [],
-      maxTasksId: 0,
+      maxTasksKey: 0,
     }
     this.addTask = this.addTask.bind(this);
     this.tasksItemSave = this.tasksItemSave.bind(this);
+    this.tasksItemDelete = this.tasksItemDelete.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class TasksCard extends React.Component {
 
       if (!this.idb.objectStoreNames.contains('tasks-card')) { // если хранилище "tasks-card" не существует
         this.idb.createObjectStore('tasks-card', {// создаем хранилище
-          keyPath: 'id',//вместо этого можно использовать такой подход: const request = tasksCard.add(task, task.id); ниже
+          keyPath: 'key',//вместо этого можно использовать такой подход: const request = tasksCard.add(task, task.id); ниже
           // autoIncrement: true,//вместо этого можно использовать такой подход: const request = tasksCard.add(task, task.id); ниже
         });
       }
@@ -35,18 +36,18 @@ class TasksCard extends React.Component {
       // Чтобы удалить хранилище объектов:
       // this.idb.deleteObjectStore('tasks-card');
 
-      switch (this.idb.version) { // существующая (старая) версия базы данных
-        case 0:
-          // версия 0 означает, что на клиенте нет базы данных
-          // выполнить инициализацию
-          break;
-        case 1:
-          // на клиенте версия базы данных 1
-          // обновить
-          break;
-        default:
-          console.log('some default switch');
-      }
+      // switch (this.idb.version) { // существующая (старая) версия базы данных
+      //   case 0:
+      //     // версия 0 означает, что на клиенте нет базы данных
+      //     // выполнить инициализацию
+      //     break;
+      //   case 1:
+      //     // на клиенте версия базы данных 1
+      //     // обновить
+      //     break;
+      //   default:
+      //     console.log('some default switch');
+      // }
     }
 
     openedIndexedDB.onerror = function () {
@@ -66,8 +67,7 @@ class TasksCard extends React.Component {
       this.transaction = this.idb.transaction('tasks-card', 'readonly');
 
       let tasksCardTransaction = this.transaction.objectStore("tasks-card");
-      console.log('tasksCardTransaction: ');
-      console.log('tasksCardTransaction: ' + tasksCardTransaction);
+      console.log('tasksCardTransaction: '); console.log(tasksCardTransaction);
 
       // // получить одну книгу
       // books.get('js')
@@ -78,27 +78,31 @@ class TasksCard extends React.Component {
       // // получить все ключи: id >= 'js'
       // books.getAllKeys(IDBKeyRange.lowerBound('js', true))
 
-      // получить все книги
+      // Получить все задачи:
       let allTasks = tasksCardTransaction.getAll();
       this.transaction.oncomplete = function () {
-        console.log("Транзакция idb выполнена");
+        console.log("Транзакция idb allTasks выполнена: ");
         console.log(allTasks.result);
         for (let item of allTasks.result) {
+          if (item.deleted) continue;
           let newTaskJSX = (
             <TasksItem
               content={item.content}
-              created={item.created}
-              dataId={item.id}
-              id={'id-' + item.id}
+              data-key={item.key}
+              id={'i-' + item.key}
               className='tasks-list__tasks-item'
-              key={item.id}
+              key={item.key}
               tasksItemSave={this.tasksItemSave}
+              tasksItemDelete={this.tasksItemDelete}
+              data-created={item.created}
             />
           );
 
           this.setState((state, props) => ({
             tasksList: state.tasksList.concat(newTaskJSX),
+            maxTasksKey: item.key,
           }));
+          console.log('this.state.tasksList: ');console.log(this.state.tasksList);
         }
       }.bind(this);
 
@@ -113,7 +117,9 @@ class TasksCard extends React.Component {
     // Удалить базу данных:
     // const deleteIndexedDB = indexedDB.deleteDatabase('tasks-card');
     // deleteRequest.onsuccess/onerror отслеживает результат
-  }
+  }//componentDidMount()
+
+
 
   addTask() {
     console.log('adding task...');
@@ -125,42 +131,43 @@ class TasksCard extends React.Component {
     // console.log(tasksCardTransaction);
 
     let newTask = {
-      id: this.state.maxTasksId + 1,
+      key: this.state.maxTasksKey + 1,
       content: '',
       created: new Date(),
     };
+    console.log(newTask.key);
+    console.log(this.state.maxTasksKey);
 
     let request = tasksCardTransaction.add(newTask);//, task.id
 
-    this.transaction.oncomplete = function () {
-      console.log("Транзакция idb выполнена");
-    };
-
-    this.setState((state, props) => ({
-      maxTasksId: state.maxTasksId + 1
-    }));
+    // this.transaction.oncomplete = function () {
+    //   console.log("Транзакция добавления задачи выполнена");
+    // };
 
     let newTaskJSX = (
       <TasksItem
         content={newTask.content}
-        created={newTask.created}
-        dataId={newTask.id}
-        id={'id-' + newTask.id}
+        data-created={newTask.created}
+        data-key={newTask.key}
+        id={'i-' + newTask.key}
         className='tasks-list__tasks-item'
-        key={newTask.id}
+        key={newTask.key}
         tasksItemSave={this.tasksItemSave}
+        tasksItemDelete={this.tasksItemDelete}
       />
     );
 
     // console.log(this.state.tasksList);
     // this.tasksList.append( newTaskJSX );
-    this.setState((state, props) => ({
-      tasksList: state.tasksList.concat(newTaskJSX),
-    }));
 
     request.onsuccess = function () {
       console.log("Задача добавлена в хранилище объектов (idb): ", request.result);
-    };
+
+      this.setState((state, props) => ({
+        tasksList: state.tasksList.concat(newTaskJSX),
+        maxTasksKey: state.maxTasksKey + 1
+      }));
+    }.bind(this);
 
     request.onerror = function (event) {
       console.log("Ошибка: ", request.error);
@@ -183,10 +190,84 @@ class TasksCard extends React.Component {
     // };
   }
 
+
+
   tasksItemSave(e) {
     console.log('saving this task!!!');
-    
+    let curTasksItem = e.target.parentElement;
+    console.log(curTasksItem);
+    let updateTask = {
+      key: +curTasksItem.dataset.key,
+      content: curTasksItem.querySelector('.tasks-item__content').value,
+      updated: new Date(),
+      created: curTasksItem.dataset.created,
+    };
+    console.log(updateTask);
+
+    console.log('update task...');
+    // console.log(this.idb);
+    this.transaction = this.idb.transaction('tasks-card', 'readwrite');
+    this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
+
+    let request = this.tasksCardTransaction.put(updateTask);
+
+    // this.transaction.oncomplete = function () {
+    //   console.log("Транзакция обновления задачи выполнена");
+    // };
+
+    request.onsuccess = function () {
+      console.log("Задача обновлена в idb: ", request.result);
+    };
+
+    request.onerror = function (event) {
+      console.log("Ошибка обновления задачи в idb: ", request.error);
+    };
   }
+
+
+
+  tasksItemDelete(e) {
+    console.log('deleting this task!!!');
+    let curTasksItem = e.target.parentElement;
+    let curTasksItemKey = +curTasksItem.dataset.key;
+    this.transaction = this.idb.transaction('tasks-card', 'readwrite');
+    this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
+
+    console.log(curTasksItemKey);
+
+    let updateTask = {
+      key: +curTasksItem.dataset.key,
+      content: curTasksItem.querySelector('.tasks-item__content').value,
+      deleted: new Date(),
+      created: curTasksItem.dataset.created,
+    };
+
+    let request = this.tasksCardTransaction.put(updateTask);
+
+    // this.transaction.oncomplete = function() {
+    //   console.log("Транзакция удаления задачи выполнена");
+    // };
+
+    request.onsuccess = function () {
+      console.log("Задача удалена в idb: ", request.result);
+      curTasksItem.remove();
+      // console.log(this.state.tasksList);
+      // this.state.tasksList.map((index, task) => {
+      //   if (+task.key === +curTasksItemKey) {
+      //     // console.log(task);
+      //     this.setState((state, props) => ({
+      //       tasksList: state.tasksList.splice(index, 1),
+      //     }));
+      //   }
+      // });
+    }.bind(this);
+
+    request.onerror = function (event) {
+      console.log("Ошибка удаления задачи в idb: ", request.error);
+    };
+  }
+
+
 
   render() {
     return (
