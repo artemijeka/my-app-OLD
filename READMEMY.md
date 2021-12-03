@@ -1,14 +1,14 @@
-##### Остановился тут: 
-  ###### js indexedDB: 
+Остановился тут: 
+  js indexedDB: 
     Поиск по индексированному полю https://learn.javascript.ru/indexeddb#poisk-po-indeksirovannomu-polyu
 
-  ###### reactjs: 
+  reactjs: 
     https://ru.reactjs.org/docs/forwarding-refs.html
 
-###### Пропустил пока что:
+Пропустил пока что:
   https://ru.reactjs.org/docs/context.html
 
-###### Теория
+Теория
   Состояние === интерактивность
 
   Что должно храниться в состоянии? Задайте себе три вопроса:
@@ -24,18 +24,15 @@
             Значение чекбокса
               Моё: то есть то что
   
-##### Debug 
+Debug 
   https://github.com/facebook/react/tree/main/packages/react-devtools
   npx react-devtools
 
-##### * В корне версия с интеграцией в html при помощи:
-  `<script scrossorigin src="..."></script>`
-##### * В my-app полная система сборки 
-  `npx create-react-app`
-##### разработка
+Разработка
   ```
-  cd my-app
   npm start
   ```
-##### сборка
-  `npm run build `  
+Сборка
+  ```
+  npm run build
+  ```
