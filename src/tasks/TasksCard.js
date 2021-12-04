@@ -17,6 +17,7 @@ class TasksCard extends React.Component {
     this.addTask = this.addTask.bind(this);
     this.tasksItemSave = this.tasksItemSave.bind(this);
     this.tasksItemDelete = this.tasksItemDelete.bind(this);
+    this.uploadTasksToServer = this.uploadTasksToServer.bind(this);
   }
 
 
@@ -268,6 +269,12 @@ class TasksCard extends React.Component {
 
 
 
+  uploadTasksToServer() {
+
+  }
+
+
+
   render() {
     return (
       <Card title="Мои задачи">
@@ -281,6 +288,13 @@ class TasksCard extends React.Component {
             onClick={this.addTask}
           >
             +
+          </Button>
+          <Button
+            className="tasks-item__button --yellow"
+            title="Загрузить на сервер!"
+            onClick={this.uploadTasksToServer} 
+          >
+            ^
           </Button>
         </div>
       </Card>
