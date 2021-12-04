@@ -5,10 +5,6 @@ import './tasks-card.scss';
 class Tasks extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // tasksItems: <br/>,
-      // idb: null,
-    }
   }
 
   render() {
