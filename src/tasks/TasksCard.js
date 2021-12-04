@@ -1,8 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import Card from '../card/Card';
 import Button from '../button/Button';
 import TasksItem from './TasksItem';
 import './tasks-card.scss';
+
+
 
 class TasksCard extends React.Component {
   constructor(props) {
@@ -50,14 +53,41 @@ class TasksCard extends React.Component {
       };
 
       this.transaction = this.idb.transaction('tasks-card', 'readonly');
-
       let tasksCardTransaction = this.transaction.objectStore("tasks-card");
-      console.log('tasksCardTransaction: '); console.log(tasksCardTransaction);
-
       this.allTasks = tasksCardTransaction.getAll();
 
       this.transaction.oncomplete = function () {
         console.log("Транзакция idb allTasks result выполнена: "); console.log(this.allTasks.result);
+
+        if (this.allTasks.result.length === 0) {
+          axios.get('https://web.master-artem.ru/api/my-app/server.php', {
+            params: {
+              get_db: true
+            }
+          })
+          .then(function (response) {
+            let allTasksFromServer = response.data;
+            console.log('JSON allTasksFromServer: '); console.log(allTasksFromServer);
+            // console.log('JSON.parse allTasksFromServer: ');console.log(JSON.parse(allTasksFromServer));
+
+            this.transaction = this.idb.transaction('tasks-card', 'readwrite');
+            this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
+
+            allTasksFromServer.map((task) => {
+              console.log('task from server: '); console.log(task);
+              let request = this.tasksCardTransaction.put(task);
+              console.log(request);
+            });
+
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function () {
+            // always executed
+          });
+        }
+
         for (let item of this.allTasks.result) {
           if (item.deleted) {
             this.setState((state, props) => ({
@@ -65,7 +95,7 @@ class TasksCard extends React.Component {
             }));
             continue;
           };
-          
+
           let newTaskJSX = (
             <TasksItem
               content={item.content}
