@@ -9,9 +9,7 @@ class Tasks extends React.Component {
 
   render() {
     return (
-      <TasksCard
-        // children={this.state.tasksItems}
-      />
+      <TasksCard />
     );
   }
 }

@@ -16,8 +16,9 @@ class TasksCard extends React.Component {
     this.tasksItemDelete = this.tasksItemDelete.bind(this);
   }
 
-  componentDidMount() {
 
+
+  componentDidMount() {
     const openedIndexedDB = indexedDB.open('tasks', 1);
 
     openedIndexedDB.onupgradeneeded = function () {
@@ -32,22 +33,6 @@ class TasksCard extends React.Component {
           // autoIncrement: true,//вместо этого можно использовать такой подход: const request = tasksCard.add(task, task.id); ниже
         });
       }
-
-      // Чтобы удалить хранилище объектов:
-      // this.idb.deleteObjectStore('tasks-card');
-
-      // switch (this.idb.version) { // существующая (старая) версия базы данных
-      //   case 0:
-      //     // версия 0 означает, что на клиенте нет базы данных
-      //     // выполнить инициализацию
-      //     break;
-      //   case 1:
-      //     // на клиенте версия базы данных 1
-      //     // обновить
-      //     break;
-      //   default:
-      //     console.log('some default switch');
-      // }
     }
 
     openedIndexedDB.onerror = function () {
@@ -69,22 +54,18 @@ class TasksCard extends React.Component {
       let tasksCardTransaction = this.transaction.objectStore("tasks-card");
       console.log('tasksCardTransaction: '); console.log(tasksCardTransaction);
 
-      // // получить одну книгу
-      // books.get('js')
-      // // получить все книги с 'css' < id < 'html'
-      // books.getAll(IDBKeyRange.bound('css', 'html'))
-      // // получить книги с 'html' <= id
-      // books.getAll(IDBKeyRange.lowerBound('html', true))
-      // // получить все ключи: id >= 'js'
-      // books.getAllKeys(IDBKeyRange.lowerBound('js', true))
+      this.allTasks = tasksCardTransaction.getAll();
 
-      // Получить все задачи:
-      let allTasks = tasksCardTransaction.getAll();
       this.transaction.oncomplete = function () {
-        console.log("Транзакция idb allTasks выполнена: ");
-        console.log(allTasks.result);
-        for (let item of allTasks.result) {
-          if (item.deleted) continue;
+        console.log("Транзакция idb allTasks result выполнена: "); console.log(this.allTasks.result);
+        for (let item of this.allTasks.result) {
+          if (item.deleted) {
+            this.setState((state, props) => ({
+              maxTasksKey: item.key,
+            }));
+            continue;
+          };
+          
           let newTaskJSX = (
             <TasksItem
               content={item.content}
@@ -102,7 +83,7 @@ class TasksCard extends React.Component {
             tasksList: state.tasksList.concat(newTaskJSX),
             maxTasksKey: item.key,
           }));
-          console.log('this.state.tasksList: ');console.log(this.state.tasksList);
+          console.log('this.state.tasksList: '); console.log(this.state.tasksList);
         }
       }.bind(this);
 
@@ -113,22 +94,15 @@ class TasksCard extends React.Component {
       // есть другое соединение к той же базе
       // и оно не было закрыто после срабатывания на нём idb.onversionchange
     };
-
-    // Удалить базу данных:
-    // const deleteIndexedDB = indexedDB.deleteDatabase('tasks-card');
-    // deleteRequest.onsuccess/onerror отслеживает результат
   }//componentDidMount()
 
 
 
   addTask() {
     console.log('adding task...');
-    // console.log(this.idb);
     this.transaction = this.idb.transaction('tasks-card', 'readwrite');
 
     let tasksCardTransaction = this.transaction.objectStore("tasks-card");
-
-    // console.log(tasksCardTransaction);
 
     let newTask = {
       key: this.state.maxTasksKey + 1,
@@ -140,9 +114,9 @@ class TasksCard extends React.Component {
 
     let request = tasksCardTransaction.add(newTask);//, task.id
 
-    // this.transaction.oncomplete = function () {
-    //   console.log("Транзакция добавления задачи выполнена");
-    // };
+    this.transaction.oncomplete = function () {
+      console.log("Транзакция добавления задачи выполнена");
+    };
 
     let newTaskJSX = (
       <TasksItem
@@ -156,9 +130,6 @@ class TasksCard extends React.Component {
         tasksItemDelete={this.tasksItemDelete}
       />
     );
-
-    // console.log(this.state.tasksList);
-    // this.tasksList.append( newTaskJSX );
 
     request.onsuccess = function () {
       console.log("Задача добавлена в хранилище объектов (idb): ", request.result);
@@ -178,9 +149,7 @@ class TasksCard extends React.Component {
         event.stopPropagation(); // предотвращаем всплытие ошибки
         // ...можно попробовать использовать другой ключ...
       } else {
-        // ничего не делаем
-        // транзакция будет отменена
-        // мы можем обработать ошибку в transaction.onabort
+        // ничего не делаем // транзакция будет отменена // мы можем обработать ошибку в transaction.onabort
       }
     };
 
@@ -205,7 +174,7 @@ class TasksCard extends React.Component {
     console.log(updateTask);
 
     console.log('update task...');
-    // console.log(this.idb);
+
     this.transaction = this.idb.transaction('tasks-card', 'readwrite');
     this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
 

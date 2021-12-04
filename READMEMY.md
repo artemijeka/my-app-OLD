@@ -1,13 +1,14 @@
 Остановился тут: 
   js indexedDB: 
-    https://learn.javascript.ru/indexeddb#obyortka-dlya-promisov
+    https://learn.javascript.ru/indexeddb
 
   reactjs: 
     https://ru.reactjs.org/docs/forwarding-refs.html
 
 Пропустил пока что:
   https://ru.reactjs.org/docs/context.html
-
+  https://ru.reactjs.org/docs/error-boundaries.html
+  
 Теория
   Состояние === интерактивность
 
