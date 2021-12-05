@@ -5,19 +5,19 @@ import './index.scss';
 
 import reportWebVitals from '../reportWebVitals';
 
-import FilterableProductTable from '../testings/FilterableProductTable';
-import CalculatorBoiling from '../testings/CalculatorBoiling';
-import Reservation from '../testings/Reservation';
-import FlavorForm from '../testings/FlavorForm';
-import EssayForm from '../testings/EssayForm';
-import NameForm from '../testings/NameForm';
-import NumberList from '../testings/NumberList';
-import Warning from '../testings/Warning';
-import LoginControl from '../testings/LoginControl';
-import Toggle from '../testings/Toggle';
-import Clock from '../testings/Clock';
-import Comment from '../testings/Comment';
-import Testings from '../testings/Testings';
+import FilterableProductTable from './FilterableProductTable';
+import CalculatorBoiling from './CalculatorBoiling';
+import Reservation from './Reservation';
+import FlavorForm from './FlavorForm';
+import EssayForm from './EssayForm';
+import NameForm from './NameForm';
+import NumberList from './NumberList';
+import Warning from './Warning';
+import LoginControl from './LoginControl';
+import Toggle from './Toggle';
+import Clock from './Clock';
+import Comment from './Comment';
+import Testings from './Testings';
 
 
 

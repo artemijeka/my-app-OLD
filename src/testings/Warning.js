@@ -1,5 +1,5 @@
 import React from 'react';
-import './Warning.scss';
+import c from './Warning.module.css';
 
 function WarningBanner(props) {
   if (!props.warn) {//если не warn то не показываем WarningBanner
@@ -7,7 +7,7 @@ function WarningBanner(props) {
   }
 
   return (//иначе выводим WarningBanner
-    <div className="warning">
+    <div className={c.warning}>
       Предупреждение!
     </div>
   );

@@ -51,7 +51,7 @@ class TasksCard extends React.Component {
 
       this.idb.onversionchange = function () {
         this.idb.close();
-        alert("База данных устарела, пожалуста, перезагрузите страницу.")
+        alert("База данных устарела, пожалуйста, перезагрузите страницу.")
       };
 
       this.transaction = this.idb.transaction('tasks-card', 'readonly');
@@ -64,7 +64,7 @@ class TasksCard extends React.Component {
         if (this.allTasksFromDB.result.length === 0) {
           axios.get(this.state.serverURL, {
             params: {
-              get_db: 1,//version db
+              get_db: '1',//version db
             }
           })
             .then(function (response) {
@@ -268,28 +268,25 @@ class TasksCard extends React.Component {
 
       this.JSONTasksFromDB = JSON.stringify(this.allTasksFromDB.result);
 
-      const fetchBodyRequest = {tasks: this.JSONTasksFromDB};
-
-      // await fetch(this.state.serverURL, {
-      //   method: 'POST',
-      //   // headers: {
-      //   //   'Content-Type': 'application/json;charset=utf-8'
-      //   // },
-      //   body: fetchBodyRequest,
-      // }).then(function (response) {
-      //   console.log( response.body );
-      // }).then(function (data) {
-      //   console.log( data );
-      // });
-      axios.post(this.state.serverURL, {
-        tasks: this.JSONTasksFromDB,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
+      const fetchBodyRequest = { tasks: this.JSONTasksFromDB };
+      await fetch(this.state.serverURL, {
+        method: 'POST',
+        body: fetchBodyRequest,
+      }).then(function (response) {
+        console.log(response.body);
+      }).then(function (data) {
+        console.log(data);
       });
+
+      // axios.post(this.state.serverURL, {
+      //   tasks: this.JSONTasksFromDB,
+      // })
+      // .then(function (response) {
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
 
     }.bind(this);
   }

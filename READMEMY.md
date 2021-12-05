@@ -7,7 +7,7 @@
   может понадобится fetch
     https://learn.javascript.ru/fetch
 
-  reactjs: 
+  react js: 
     https://ru.reactjs.org/docs/forwarding-refs.html
 
 Пропустил пока что:
