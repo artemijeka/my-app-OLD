@@ -1,6 +1,6 @@
 import React from 'react';
-import TasksCard from './TasksCard';
 import './tasks-card.scss';
+import TasksCard from './TasksCard';
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Tasks extends React.Component {
 
   render() {
     return (
-      <TasksCard />
+      <TasksCard/>
     );
   }
 }

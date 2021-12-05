@@ -2,12 +2,20 @@
   js indexedDB: 
     https://learn.javascript.ru/indexeddb
 
+  кроме axios 
+    https://www.npmjs.com/package/axios#installing
+  может понадобится fetch
+    https://learn.javascript.ru/fetch
+
   reactjs: 
     https://ru.reactjs.org/docs/forwarding-refs.html
 
 Пропустил пока что:
   https://ru.reactjs.org/docs/context.html
   https://ru.reactjs.org/docs/error-boundaries.html
+
+Димыч React путь самурая
+  https://www.youtube.com/watch?v=VTr3pCutjxg&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=9
   
 Теория
   Состояние === интерактивность
