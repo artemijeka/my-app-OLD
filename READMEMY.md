@@ -1,5 +1,5 @@
 Димыч React путь самурая
-    https://www.youtube.com/watch?v=IL1LTYDNAhk&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=20
+  18 https://www.youtube.com/watch?v=IL1LTYDNAhk&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=20
 
 Остановился тут: 
   js indexedDB: 
