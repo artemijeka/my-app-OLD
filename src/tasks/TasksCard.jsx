@@ -266,7 +266,7 @@ class TasksCard extends React.Component {
 
             this.JSONTasksFromDB = JSON.stringify(this.allTasksFromDB.result);
 
-            const fetchBodyRequest = {tasks: this.JSONTasksFromDB};
+            const fetchBodyRequest = { tasks: this.JSONTasksFromDB };
             await fetch(this.state.serverURL, {
                 method: 'POST',
                 body: fetchBodyRequest,
