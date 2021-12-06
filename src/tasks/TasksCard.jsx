@@ -20,7 +20,7 @@ class TasksCard extends React.Component {
         this.uploadTasksToServer = this.uploadTasksToServer.bind(this);
     }
 
-
+    
     componentDidMount() {
         const openedIndexedDB = indexedDB.open('tasks', 1);
 
