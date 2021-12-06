@@ -98,7 +98,6 @@ class TasksCard extends React.Component {
                         }));
                         continue;
                     }
-                    ;
 
                     let newTaskJSX = (
                         <TasksItem
