@@ -1,5 +1,11 @@
+TODO
+  выключение шума помидора
+  динь дон по окончании помидора
+
+
+
 Димыч React путь самурая
-  18 https://www.youtube.com/watch?v=IL1LTYDNAhk&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=20
+  https://www.youtube.com/watch?v=Wm62LRtxomk&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=21
 
 Остановился тут: 
   js indexedDB: 
