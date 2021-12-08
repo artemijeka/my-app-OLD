@@ -1,13 +1,16 @@
-TODO
-  выключение шума помидора
-  динь дон по окончании помидора
+TODO  
+  выключение шума помидора (пока средствами браузера выключается)   
+  V динь дон по окончании помидора
 
 
 
 Димыч React путь самурая
   https://www.youtube.com/watch?v=Wm62LRtxomk&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=21
 
-Остановился тут: 
+Остановился тут:
+  react-router-dom
+    https://github.com/remix-run/react-router/blob/main/docs/getting-started/installation.md
+
   js indexedDB: 
     https://learn.javascript.ru/indexeddb
 

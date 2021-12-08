@@ -1,6 +1,6 @@
 export default function AudioPlayer(props) {
   return (
-    <audio id="audioPlayer" loop="loop">
+    <audio id={props.id} loop={props.loop}>
       <source src={props.audioTrackSrc} type="audio/mpeg" />
     </audio>
   );

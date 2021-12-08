@@ -17,12 +17,15 @@ class Pomodoro extends React.Component {
       pomodoroAmountTimer: 0,
       pomodoroInterval: null,
       noiseUrl: './audio/noise.mp3',
+      stopPomodoroUrl: './audio/end-pomodoro.mp3',
       break: false,
       selectDefaultValue: 30,
     }
     this.startPomodoro = this.startPomodoro.bind(this);
     this.resetPomodoro = this.resetPomodoro.bind(this);
+    this.resetAmountTimer = this.resetAmountTimer.bind(this);
     this.audioPlayer = null;
+    this.audioPlayerStopPomodoro = null;
   }
 
   componentDidMount() {//встроенный метод React
@@ -35,11 +38,11 @@ class Pomodoro extends React.Component {
         buttonName: pomodoroMinutes + ':' + pomodoroSeconds,
         pomodoroAmountTimer: localStorage.getItem('pomodoroAmountTimer'),
       });
-      
+
       document.title = pomodoroMinutes + ':' + pomodoroSeconds;
     } else {
       // По умолчанию кол-во минут берётся из select а там по умолчанию 30 минут
-      this.setState((state, props)=>({
+      this.setState((state, props) => ({
         pomodoroTimer: [Number(document.querySelector('#pomodoroMinutes').value), state.pomodoroTimer[1]],
         pomodoroCurrentTimer: Number(document.querySelector('#pomodoroMinutes').value),
         pomodoroAmountTimer: Number(localStorage.getItem('pomodoroAmountTimer')),
@@ -71,15 +74,16 @@ class Pomodoro extends React.Component {
     if (!this.state.pomodoroInterval) {
       this.audioPlayer = document.getElementById('audioPlayer');
       this.audioPlayer.play();
+      this.audioPlayerStopPomodoro = document.getElementById('audioPlayerStopPomodoro');
 
       let pomodoroInterval = setInterval(() => {
-        this.setState((state, props)=>({
+        this.setState((state, props) => ({
           buttonName: state.pomodoroTimer.join(':'),
         }));
 
         // Если секунд становится 0
         if (this.state.pomodoroTimer[0] !== 0 && this.state.pomodoroTimer[1] === 0) {
-          this.setState((state, props)=>({
+          this.setState((state, props) => ({
             pomodoroTimer: [state.pomodoroTimer[0] - 1, 59],
           }));
         }
@@ -87,7 +91,10 @@ class Pomodoro extends React.Component {
         else if (this.state.pomodoroTimer[0] === 0 && this.state.pomodoroTimer[1] === 0) {
 
           clearInterval(this.state.pomodoroInterval);
+
           this.audioPlayer.pause();
+          this.audioPlayerStopPomodoro.play();
+
           this.setState({
             pomodoroInterval: null,
             buttonName: 'Отдых',
@@ -101,13 +108,13 @@ class Pomodoro extends React.Component {
 
         } else {
           // this.state.pomodoroTimer[1] -= 1;
-          this.setState((state, props)=>({
+          this.setState((state, props) => ({
             pomodoroTimer: [state.pomodoroTimer[0], state.pomodoroTimer[1] - 1],
           }));
         }
 
         // Обновляем состояние таймера
-        this.setState((state, props)=>({
+        this.setState((state, props) => ({
           pomodoroTimer: [state.pomodoroTimer[0], state.pomodoroTimer[1]],
         }));
         localStorage.setItem('pomodoroMinutes', this.state.pomodoroTimer[0]);
@@ -122,6 +129,7 @@ class Pomodoro extends React.Component {
     }
   }
 
+
   resetPomodoro() {
     this.setState({
       pomodoroTimer: [0, 0],
@@ -134,14 +142,28 @@ class Pomodoro extends React.Component {
     localStorage.setItem('pomodoroCurrentTimer', 0);
   }
 
+
+  resetAmountTimer() {
+    if (window.confirm('Точно сбросить весь таймер?')) {
+      this.setState({
+        pomodoroAmountTimer: 0,
+      });
+      localStorage.setItem('pomodoroAmountTimer', 0);
+      document.title = 'Весь помодоро таймер сброшен!';
+    }
+  }
+
+
   render() {
     return (
       <Card title="«Техника помодоро», для концентрированной и интенсивной работы.">
         <p className="card__text">
           Желательно таймер не прерывать, прерванный таймер - это уже не «помодоро».
-          Если что-то важное придёт в голову, лучше запишите в список дел эту мысль и вернитесь к этому после техники «помодоро».
+          Если что-то важное придёт в голову, лучше запишите в список дел эту мысль и вернитесь к этому после техники
+          «помодоро».
         </p>
-        <AudioPlayer audioTrackSrc={this.state.noiseUrl} />
+        <AudioPlayer id='audioPlayer' loop='loop' audioTrackSrc={this.state.noiseUrl}/>
+        <AudioPlayer id='audioPlayerStopPomodoro' audioTrackSrc={this.state.stopPomodoroUrl}/>
         <div className="row mt-05">
           <Button
             className={`card__button ${(this.state.break) ? '--break' : ''}`}
@@ -170,16 +192,25 @@ class Pomodoro extends React.Component {
               </>
             }
           />
-          <Alert className="card__alert" text="минут" />
+          <Alert className="card__alert" text="минут"/>
           <Button
             className={`card__button --reset`}
             onClick={this.resetPomodoro}
+            title='Сбросить текущий помидор!'
           >
             Сбросить
           </Button>
         </div>
         <div className="row mt-05">
-          <Alert className="card__alert" text={'Сегодня напомидорил: ' + (this.state.pomodoroAmountTimer / 60).toFixed(2) + ' часов'} />
+          <Alert className="card__alert"
+                 text={'Сегодня напомидорил: ' + (this.state.pomodoroAmountTimer / 60).toFixed(2) + 'ч.'}/>
+          <Button
+            className={`card__button --reset`}
+            onClick={this.resetAmountTimer}
+            title='Сбросить весь таймер!'
+          >
+            x
+          </Button>
         </div>
       </Card>
     );

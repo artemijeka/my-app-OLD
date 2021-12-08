@@ -7,7 +7,8 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link
+  Link,
+  NavLink,
 } from "react-router-dom";
 
 import reportWebVitals from './reportWebVitals';
@@ -16,9 +17,9 @@ ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <div className="navigation">
-        <Link to='/' class="navigation__link">Main</Link> |
-        <Link to='/tasks' class="navigation__link">Tasks</Link> |
-        <Link to='/pomodoro' class="navigation__link">Pomodoro</Link>
+        <NavLink to='/' className={`navigation__link`}>Main</NavLink> |
+        <NavLink to='/tasks' className={`navigation__link`}>Tasks</NavLink> |
+        <NavLink to='/pomodoro' className={`navigation__link`}>Pomodoro</NavLink>
       </div>
       <Routes>
         <Route path='/tasks' element={<Tasks />} />
