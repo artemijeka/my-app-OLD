@@ -16,8 +16,8 @@ ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <div className="navigation">
-        <Link to='/' class="navigation__link">Main</Link> | 
-        <Link to='/tasks' class="navigation__link">Tasks</Link> | 
+        <Link to='/' class="navigation__link">Main</Link> |
+        <Link to='/tasks' class="navigation__link">Tasks</Link> |
         <Link to='/pomodoro' class="navigation__link">Pomodoro</Link>
       </div>
       <Routes>
