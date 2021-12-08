@@ -9,7 +9,7 @@ class Tasks extends React.Component {
 
   render() {
     return (
-      <TasksCard/>
+      <TasksCard />
     );
   }
 }

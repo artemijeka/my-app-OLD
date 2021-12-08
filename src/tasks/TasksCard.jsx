@@ -65,8 +65,7 @@ class TasksCard extends React.Component {
             params: {
               get_db: '1',//version db
             }
-          })
-            .then(function (response) {
+          }).then(function (response) {
               let allTasksFromServer = response.data;
               console.log('JSON allTasksFromServer: ');
               console.log(allTasksFromServer);

@@ -25,6 +25,14 @@ body {
 .navigation {
   display: flex;
   justify-content: center;
+  font-weight: 600;
+  &__link {
+    color: #FF7171;
+    text-decoration: none;
+    &.active {
+      text-decoration: underline;
+    }
+  }
 }
 
 .row {

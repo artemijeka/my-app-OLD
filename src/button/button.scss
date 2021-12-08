@@ -6,6 +6,7 @@
   padding: 0.4em;
   border: 0.15em solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  
   &.--yellow {
     background-color: #FFFA7D;
   }
@@ -15,7 +16,12 @@
     background-color: #A0FF6F;
   }
 
-  &.--reset {
+  &.--reset,
+  &.--orange {
     background-color: #FFB071;//#FFA461;
+  }
+
+  &.--blue {
+    background-color: #78AFFF;
   }
 }

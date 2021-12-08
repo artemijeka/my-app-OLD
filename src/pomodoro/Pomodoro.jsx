@@ -166,7 +166,7 @@ class Pomodoro extends React.Component {
         <AudioPlayer id='audioPlayerStopPomodoro' audioTrackSrc={this.state.stopPomodoroUrl}/>
         <div className="row mt-05">
           <Button
-            className={`card__button ${(this.state.break) ? '--break' : ''}`}
+            className={`card__button ${(this.state.break) ? '--break' : '--blue'}`}
             onClick={this.startPomodoro}
           >
             {this.state.buttonName}
@@ -203,9 +203,9 @@ class Pomodoro extends React.Component {
         </div>
         <div className="row mt-05">
           <Alert className="card__alert"
-                 text={'Сегодня напомидорил: ' + (this.state.pomodoroAmountTimer / 60).toFixed(2) + 'ч.'}/>
+                 text={'Сегодня напомидорил: ' + (this.state.pomodoroAmountTimer / 60).toFixed(2) + ' ч.'}/>
           <Button
-            className={`card__button --reset`}
+            className={`card__button`}
             onClick={this.resetAmountTimer}
             title='Сбросить весь таймер!'
           >
