@@ -66,22 +66,22 @@ class TasksCard extends React.Component {
               get_db: '1',//version db
             }
           }).then(function (response) {
-              let allTasksFromServer = response.data;
-              console.log('JSON allTasksFromServer: ');
-              console.log(allTasksFromServer);
-              // console.log('JSON.parse allTasksFromServer: ');console.log(JSON.parse(allTasksFromServer));
+            let allTasksFromServer = response.data;
+            console.log('JSON allTasksFromServer: ');
+            console.log(allTasksFromServer);
+            // console.log('JSON.parse allTasksFromServer: ');console.log(JSON.parse(allTasksFromServer));
 
-              this.transaction = this.idb.transaction('tasks-card', 'readwrite');
-              this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
+            this.transaction = this.idb.transaction('tasks-card', 'readwrite');
+            this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
 
-              allTasksFromServer.map((task) => {
-                console.log('task from server: ');
-                console.log(task);
-                let request = this.tasksCardTransaction.put(task);
-                console.log(request);
-              });
+            allTasksFromServer.map((task) => {
+              console.log('task from server: ');
+              console.log(task);
+              let request = this.tasksCardTransaction.put(task);
+              console.log(request);
+            });
 
-            }.bind(this))
+          }.bind(this))
             .catch(function (error) {
               console.log(error);
             })
@@ -265,7 +265,7 @@ class TasksCard extends React.Component {
 
       this.JSONTasksFromDB = JSON.stringify(this.allTasksFromDB.result);
 
-      const fetchBodyRequest = {tasks: this.JSONTasksFromDB};
+      const fetchBodyRequest = { tasks: this.JSONTasksFromDB };
       await fetch(this.state.serverURL, {
         method: 'POST',
         body: fetchBodyRequest,
