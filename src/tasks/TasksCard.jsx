@@ -153,12 +153,11 @@ class TasksCard extends React.Component {
         content={newTask.content}
         data-created={newTask.created}
         data-key={newTask.key}
-        id={'i-' + newTask.key}
+        id={`i-${newTask.key}`}
         className='tasks-list__tasks-item'
         key={newTask.key}
         tasksItemSave={this.tasksItemSave}
-        tasksItemDelete={this.tasksItemDelete}
-      />
+        tasksItemDelete={this.tasksItemDelete} />
     );
 
     request.onsuccess = function () {
@@ -296,18 +295,10 @@ class TasksCard extends React.Component {
           {this.state.tasksList}
         </div>
         <div className="row js-c mt-05">
-          <Button
-            className="tasks-item__button --green"
-            title="Добавить задачу!"
-            onClick={this.addTask}
-          >
+          <Button className="tasks-item__button --green" title="Добавить задачу!" onClick={this.addTask} >
             +
           </Button>
-          <Button
-            className="tasks-item__button --yellow"
-            title="Загрузить на сервер!"
-            onClick={this.uploadTasksToServer}
-          >
+          <Button className="tasks-item__button --yellow" title="Загрузить на сервер!" onClick={this.uploadTasksToServer}>
             ^
           </Button>
         </div>
