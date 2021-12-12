@@ -295,10 +295,16 @@ class TasksCard extends React.Component {
           {this.state.tasksList}
         </div>
         <div className="row js-c mt-05">
-          <Button className="tasks-item__button --green" title="Добавить задачу!" onClick={this.addTask} >
+          <Button
+            className="tasks-item__button --green"
+            title="Добавить задачу!"
+            onClick={this.addTask}>
             +
-          </Button>
-          <Button className="tasks-item__button --yellow" title="Загрузить на сервер!" onClick={this.uploadTasksToServer}>
+            </Button>
+          <Button
+            className="tasks-item__button --yellow"
+            title="Загрузить на сервер!"
+            onClick={this.uploadTasksToServer}>
             ^
           </Button>
         </div>
