@@ -6,6 +6,7 @@ import TasksItem from './TasksItem';
 import './tasks-card.scss';
 
 
+
 class TasksCard extends React.Component {
   constructor(props) {
     super(props);
@@ -312,5 +313,6 @@ class TasksCard extends React.Component {
     );
   }
 }
+
 
 export default TasksCard;

@@ -1,4 +1,5 @@
 TODO
+  * уровень громкости
   * срочно делать задачник ora не надёжна
   * сделать сигнал за 3-5 минут чтобы приготовиться отвлечься на перерыв
   * выбор шумов сделать
@@ -8,7 +9,7 @@ TODO
 
 
 Димыч React путь самурая
-  https://www.youtube.com/watch?v=wNWKFyh34r0&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=28
+  https://www.youtube.com/watch?v=5js6RxcmxOA&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8&index=31
 
 Остановился тут:
   react-router-dom
@@ -25,9 +26,9 @@ TODO
   react js: 
     https://ru.reactjs.org/docs/forwarding-refs.html
 
-Пропустил пока что:
-  https://ru.reactjs.org/docs/context.html
-  https://ru.reactjs.org/docs/error-boundaries.html
+  пропустил пока что:
+    https://ru.reactjs.org/docs/context.html
+    https://ru.reactjs.org/docs/error-boundaries.html
   
 Теория
   Состояние === интерактивность

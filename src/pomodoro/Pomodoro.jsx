@@ -155,6 +155,7 @@ class Pomodoro extends React.Component {
 
 
   render() {
+    console.log(this.props.test);
     return (
       <Card title="«Техника помодоро», для концентрированной и интенсивной работы.">
         <p className="card__text">

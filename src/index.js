@@ -1,37 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import Pomodoro from './pomodoro/Pomodoro';
-import Tasks from './tasks/Tasks';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  NavLink,
-} from "react-router-dom";
+import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 
+
 ReactDOM.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <div className="navigation">
-        <NavLink to='/' className={`navigation__link`}>Main</NavLink>&nbsp;-&nbsp; 
-        <NavLink to='/tasks' className={`navigation__link`}>Tasks</NavLink>&nbsp;-&nbsp; 
-        <NavLink to='/pomodoro' className={`navigation__link`}>Pomodoro</NavLink> 
-      </div>
-      <Routes>
-        <Route path='/tasks' element={<Tasks />} />
-        <Route path='/pomodoro' element={<Pomodoro />} />
-        <Route path='/' element={<><Tasks /><Pomodoro /></>} />
-      </Routes>
-      {/*<Tasks />*/}
-      {/*<Pomodoro />*/}
-    </React.StrictMode>
-  </BrowserRouter>,
+  <App />,
   document.getElementById('my-app')
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
