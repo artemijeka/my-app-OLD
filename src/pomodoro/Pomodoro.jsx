@@ -21,6 +21,7 @@ class Pomodoro extends React.Component {
       break: false,
       selectDefaultValue: 30,
     }
+    this.pomodoroMinutes = React.createRef();
     this.startPomodoro = this.startPomodoro.bind(this);
     this.resetPomodoro = this.resetPomodoro.bind(this);
     this.resetAmountTimer = this.resetAmountTimer.bind(this);
@@ -43,7 +44,7 @@ class Pomodoro extends React.Component {
     } else {
       // По умолчанию кол-во минут берётся из select а там по умолчанию 30 минут
       this.setState((state, props) => ({
-        pomodoroTimer: [Number(document.querySelector('#pomodoroMinutes').value), state.pomodoroTimer[1]],
+        pomodoroTimer: [Number(document.querySelector('#pomodoroMinutes').value), state.pomodoroTimer[1]],//this.pomodoroMinutes.current.value
         pomodoroCurrentTimer: Number(document.querySelector('#pomodoroMinutes').value),
         pomodoroAmountTimer: Number(localStorage.getItem('pomodoroAmountTimer')),
       }));
@@ -173,6 +174,7 @@ class Pomodoro extends React.Component {
             {this.state.buttonName}
           </Button>
           <Select
+            ref={this.pomodoroMinutes}//test 
             id="pomodoroMinutes"
             className="card__select"
             defaultValue={this.state.selectDefaultValue}
