@@ -187,7 +187,7 @@ class TasksCard extends React.Component {
     // this.transaction.onabort = function() {
     //   console.log("Ошибка", transaction.error);
     // };
-  }
+  }/* addTask() */
 
 
   tasksItemSave(e) {
@@ -220,7 +220,7 @@ class TasksCard extends React.Component {
     request.onerror = function (event) {
       console.log("Ошибка обновления задачи в idb: ", request.error);
     };
-  }
+  }/* tasksItemSave() */
 
 
   tasksItemDelete(e) {
@@ -253,30 +253,32 @@ class TasksCard extends React.Component {
     request.onerror = function (event) {
       console.log("Ошибка удаления задачи в idb: ", request.error);
     };
-  }
+  }/* tasksItemDelete() */
 
 
   uploadTasksToServer() {
     this.transaction = this.idb.transaction('tasks-card', 'readonly');
-    let tasksCardTransaction = this.transaction.objectStore("tasks-card");
-    this.allTasksFromDB = tasksCardTransaction.getAll();
+    this.tasksCardTransaction = this.transaction.objectStore("tasks-card").getAll();
+    
+    this.transaction.oncomplete = function () {
+      
+      // console.log( this.tasksCardTransaction.result );
+      this.tasksCardJSON = JSON.stringify(this.tasksCardTransaction.result);
+      // console.log(this.tasksCardJSON);
 
-    this.transaction.oncomplete = async function () {
-
-      this.JSONTasksFromDB = JSON.stringify(this.allTasksFromDB.result);
-
-      const fetchBodyRequest = { tasks: this.JSONTasksFromDB };
-      await fetch(this.state.serverURL, {
+      fetch(this.state.serverURL, {
         method: 'POST',
-        body: fetchBodyRequest,
-      }).then(function (response) {
-        console.log(response.body);
-      }).then(function (data) {
-        console.log(data);
+        body: { "add_tasks": this.tasksCardJSON },
+      }).then((response) => {
+        // console.log( response );
+        return response.json();
+      }).then(function(data) {
+        // `data` is the parsed version of the JSON returned from the above endpoint.
+        console.log(data);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
       });
 
       // axios.post(this.state.serverURL, {
-      //   tasks: this.JSONTasksFromDB,
+      //   "add_tasks": this.tasksCardJSON,
       // })
       // .then(function (response) {
       //   console.log(response);
@@ -286,7 +288,7 @@ class TasksCard extends React.Component {
       // });
 
     }.bind(this);
-  }
+  }/* uploadTasksToServer() */
 
 
   render() {

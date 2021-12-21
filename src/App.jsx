@@ -22,7 +22,7 @@ function App(props) {
         <Routes>
           <Route path='/tasks' element={<Tasks />} />
           <Route path='/pomodoro' element={<Pomodoro />} />
-          <Route path='/' element={<><Tasks /><Pomodoro test="test" /></>} />
+          <Route path='/' element={<><Tasks /><Pomodoro /></>} />
         </Routes>
         {/*<Tasks />*/}
         {/*<Pomodoro />*/}
