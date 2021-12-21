@@ -272,10 +272,7 @@ class TasksCard extends React.Component {
       }).then((response) => {
         // console.log( response );
         return response.json();
-      }).then(function(data) {
-        // `data` is the parsed version of the JSON returned from the above endpoint.
-        console.log(data);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
-      });
+      }).then(json => console.log(json));
 
       // axios.post(this.state.serverURL, {
       //   "add_tasks": this.tasksCardJSON,
