@@ -1,6 +1,6 @@
 import React from 'react';
 import './tasks-card.scss';
-import TasksCard from './TasksCard.jsx';
+import TasksCard from './TasksCard';
 
 function Tasks(props) {
   return (
