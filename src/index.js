@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 import App from './App';
-import state from './state';
+import store from './redux/store';
 
 
 
 ReactDOM.render(
-  <App />,
+  <App store={store} />,
   document.getElementById('my-app')
 );
 
