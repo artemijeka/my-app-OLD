@@ -13,7 +13,7 @@ class TasksCard extends React.Component {
     this.state = {
       tasksList: [],
       maxTasksKey: 0,
-      serverURL: 'https://web.master-artem.ru/api/my-app/server.php',
+      serverURL: 'http://localhost:3100/',//https://web.master-artem.ru/api/my-app/server.php
     }
     this.addTask = this.addTask.bind(this);
     this.tasksItemSave = this.tasksItemSave.bind(this);
@@ -62,33 +62,42 @@ class TasksCard extends React.Component {
         console.log(this.allTasksFromDB.result);
 
         if (this.allTasksFromDB.result.length === 0) {
-          axios.get(this.state.serverURL, {
-            params: {
-              get_db: '1',//version db
-            }
-          }).then(function (response) {
-            let allTasksFromServer = response.data;
-            console.log('JSON allTasksFromServer: ');
-            console.log(allTasksFromServer);
-            // console.log('JSON.parse allTasksFromServer: ');console.log(JSON.parse(allTasksFromServer));
-
-            this.transaction = this.idb.transaction('tasks-card', 'readwrite');
-            this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
-
-            allTasksFromServer.map((task) => {
-              console.log('task from server: ');
-              console.log(task);
-              let request = this.tasksCardTransaction.put(task);
-              console.log(request);
-            });
-
-          }.bind(this))
-            .catch(function (error) {
-              console.log(error);
+          fetch(this.state.serverURL + 'tasks')
+            .then(response => {
+              console.log(response.json());
             })
-            .then(function () {
-              // always executed
-            });
+            .then(data => console.log(data));
+
+          // axios.get(this.state.serverURL, {
+          //   params: {
+          //     tasks: {
+          //       key: 1
+          //     },// get_db: '1'
+          //   }
+          // }).then(function (response) {
+          //   let allTasksFromServer = response.data;
+          //   console.log('JSON allTasksFromServer: ');
+          //   console.log(allTasksFromServer);
+          //   // console.log('JSON.parse allTasksFromServer: ');console.log(JSON.parse(allTasksFromServer));
+
+          //   this.transaction = this.idb.transaction('tasks-card', 'readwrite');
+          //   this.tasksCardTransaction = this.transaction.objectStore("tasks-card");
+
+          //   allTasksFromServer.map((task) => {
+          //     console.log('task from server: ');
+          //     console.log(task);
+          //     let request = this.tasksCardTransaction.put(task);
+          //     console.log(request);
+          //   });
+
+          // }.bind(this))
+          //   .catch(function (error) {
+          //     console.log(error);
+          //   })
+          //   .then(function () {
+          //     // always executed
+          //   });
+          
         }
 
         for (let item of this.allTasksFromDB.result) {
@@ -259,9 +268,9 @@ class TasksCard extends React.Component {
   uploadTasksToServer() {
     this.transaction = this.idb.transaction('tasks-card', 'readonly');
     this.tasksCardTransaction = this.transaction.objectStore("tasks-card").getAll();
-    
+
     this.transaction.oncomplete = function () {
-      
+
       // console.log( this.tasksCardTransaction.result );
       this.tasksCardJSON = JSON.stringify(this.tasksCardTransaction.result);
       // console.log(this.tasksCardJSON);
@@ -300,7 +309,7 @@ class TasksCard extends React.Component {
             title="Добавить задачу!"
             onClick={this.addTask}>
             +
-            </Button>
+          </Button>
           <Button
             className="tasks-item__button --yellow"
             title="Загрузить на сервер!"
