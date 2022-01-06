@@ -9,7 +9,7 @@ TODO
 
 
 Димыч React путь самурая
-  https://www.youtube.com/watch?v=cbnExb3GSFM&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8
+  https://www.youtube.com/watch?v=Q_UvAaKSK90&list=PLcvhF2Wqh7DNVy1OCUpG3i5lyxyBWhGZ8
 
 Остановился тут:
   react-router-dom

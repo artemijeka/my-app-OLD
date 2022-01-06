@@ -13,7 +13,7 @@ class TasksCard extends React.Component {
     this.state = {
       tasksList: [],
       maxTasksKey: 0,
-      serverURL: 'http://localhost:3100/',//https://web.master-artem.ru/api/my-app/server.php
+      serverURL: 'https://web.master-artem.ru/api/my-app/server.php',//
     }
     this.addTask = this.addTask.bind(this);
     this.tasksItemSave = this.tasksItemSave.bind(this);
